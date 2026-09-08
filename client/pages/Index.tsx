@@ -113,13 +113,15 @@ export default function Index() {
 
       <header className="absolute left-0 right-0 top-8 z-30 border-b border-white/15 bg-ink/20 backdrop-blur-md">
         <div className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-5 lg:px-10">
-          <button className="flex items-center gap-3 text-left" onClick={() => scrollToSection("top")} aria-label="Go to top">
-            <span className="font-display text-2xl tracking-[-0.06em] text-gold">J</span>
-            <span className="hidden text-[11px] font-semibold uppercase tracking-[0.28em] sm:block">Jewelluxe Co</span>
+          <button className="group flex items-center gap-3 text-left" onClick={() => scrollToSection("top")} aria-label="Go to top">
+            <span className="flex h-9 w-9 items-center justify-center border border-gold/70 font-display text-2xl tracking-[-0.06em] text-gold transition-colors group-hover:bg-gold group-hover:text-ink">J</span>
+            <span><span className="block text-[11px] font-semibold uppercase tracking-[0.28em]">Jewelluxe Co</span><span className="mt-1 hidden text-[8px] uppercase tracking-[0.22em] text-cream/45 sm:block">Fine objects / Est. 2018</span></span>
           </button>
-          <nav className="hidden items-center gap-9 text-[10px] font-semibold uppercase tracking-[0.22em] text-cream/75 md:flex">
+          <nav className="hidden items-center gap-8 text-[10px] font-semibold uppercase tracking-[0.22em] text-cream/75 md:flex">
+            <span className="mr-1 text-[8px] tracking-[0.25em] text-gold/70">Shop</span>
             <button className="transition-colors hover:text-gold" onClick={() => scrollToSection("watches")}>Watches</button>
             <button className="transition-colors hover:text-gold" onClick={() => scrollToSection("jewelry")}>Jewelry</button>
+            <span className="ml-1 h-3 w-px bg-white/20" />
             <button className="transition-colors hover:text-gold" onClick={() => scrollToSection("story")}>Our story</button>
           </nav>
           <div className="flex items-center gap-4 text-cream">
@@ -171,12 +173,12 @@ export default function Index() {
       </section>
 
       <section id="watches" className="mx-auto max-w-[1400px] px-5 py-20 lg:px-10 lg:py-28">
-        <div className="mb-10 flex items-end justify-between gap-5">
+        <div className="mb-12 grid gap-7 border-b border-white/10 pb-9 lg:grid-cols-[1fr_1fr] lg:items-end">
           <div><p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">01 / Timepieces</p><h2 className="font-display text-5xl tracking-[-0.05em] sm:text-6xl">The watch edit</h2></div>
-          <button className="hidden items-center gap-2 border-b border-cream/30 pb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/70 transition-colors hover:border-gold hover:text-gold sm:flex" onClick={() => scrollToSection("watches")}>View all watches <ArrowUpRight size={14} /></button>
+          <div className="flex items-end justify-between gap-5"><p className="max-w-sm text-sm leading-6 text-cream/50">Precision, softened. Five silhouettes designed to mark the moments that matter.</p><button className="hidden shrink-0 items-center gap-2 border-b border-cream/30 pb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/70 transition-colors hover:border-gold hover:text-gold sm:flex" onClick={() => scrollToSection("watches")}>View all <ArrowUpRight size={14} /></button></div>
         </div>
         <div className="grid grid-cols-2 gap-x-3 gap-y-9 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-5">
-          {watches.map((watch) => <ProductCard key={watch.name} {...watch} onAdd={addToBag} />)}
+          {watches.map((watch, index) => <ProductCard key={watch.name} {...watch} number={String(index + 1).padStart(2, "0")} onAdd={addToBag} />)}
         </div>
       </section>
 
@@ -187,9 +189,9 @@ export default function Index() {
         </div>
       </section>
 
-      <section id="jewelry" className="mx-auto max-w-[1400px] px-5 py-20 lg:px-10 lg:py-28">
-        <div className="mb-10 flex items-end justify-between gap-5"><div><p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">02 / Jewelry</p><h2 className="font-display text-5xl tracking-[-0.05em] sm:text-6xl">Quietly radiant</h2></div><button onClick={() => scrollToSection("jewelry")} className="hidden items-center gap-2 border-b border-cream/30 pb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/70 sm:flex">View all jewelry <ArrowUpRight size={14} /></button></div>
-        <div className="grid grid-cols-2 gap-x-3 gap-y-9 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-5">{jewelry.map((piece) => <ProductCard key={piece.name} {...piece} onAdd={addToBag} />)}</div>
+      <section id="jewelry" className="bg-ink-soft/45 px-5 py-20 lg:px-10 lg:py-28">
+        <div className="mx-auto max-w-[1400px]"><div className="mb-12 grid gap-7 border-b border-white/10 pb-9 lg:grid-cols-[1fr_1fr] lg:items-end"><div><p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-gold">02 / Jewelry</p><h2 className="font-display text-5xl tracking-[-0.05em] sm:text-6xl">Quietly radiant</h2></div><div className="flex items-end justify-between gap-5"><p className="max-w-sm text-sm leading-6 text-cream/50">Small gestures, lasting presence. Considered forms for layering, gifting, and keeping.</p><button onClick={() => scrollToSection("jewelry")} className="hidden shrink-0 items-center gap-2 border-b border-cream/30 pb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-cream/70 sm:flex">View all <ArrowUpRight size={14} /></button></div></div>
+        <div className="grid grid-cols-2 gap-x-3 gap-y-9 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-5">{jewelry.map((piece, index) => <ProductCard key={piece.name} {...piece} number={String(index + 1).padStart(2, "0")} onAdd={addToBag} />)}</div></div>
       </section>
 
       {statusMessage && <div role="status" aria-live="polite" className="fixed bottom-5 left-1/2 z-50 -translate-x-1/2 rounded-full border border-gold/30 bg-ink-soft px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.18em] text-gold shadow-2xl">{statusMessage}</div>}
@@ -201,8 +203,8 @@ export default function Index() {
   );
 }
 
-function ProductCard({ name, type, price, image, tone, onAdd }: { name: string; type: string; price: string; image: string; tone?: string; onAdd: () => void }) {
-  return <div className="group"><div className="relative aspect-[0.82] overflow-hidden bg-cream/5"><img src={image} alt={name} loading="lazy" className="h-full w-full object-cover grayscale-[15%] transition duration-700 group-hover:scale-105 group-hover:grayscale-0" /><button onClick={onAdd} className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-ink/70 text-cream/80 opacity-100 backdrop-blur-sm transition hover:bg-gold hover:text-ink sm:opacity-0 sm:group-hover:opacity-100" aria-label={`Add ${name} to bag`}><Heart size={14} strokeWidth={1.5} /></button></div><div className="pt-4"><div className="flex items-start justify-between gap-2"><h3 className="font-display text-xl tracking-[-0.03em] text-cream sm:text-2xl">{name}</h3><span className="text-xs text-gold">{price}</span></div><p className="mt-1 text-[10px] uppercase tracking-[0.15em] text-cream/45">{type}</p>{tone && <p className="mt-2 text-[10px] text-cream/35">{tone}</p>}</div></div>;
+function ProductCard({ name, type, price, image, tone, number, onAdd }: { name: string; type: string; price: string; image: string; tone?: string; number: string; onAdd: () => void }) {
+  return <div className="group"><div className="relative aspect-[0.82] overflow-hidden bg-cream/5"><img src={image} alt={name} loading="lazy" className="h-full w-full object-cover grayscale-[15%] transition duration-700 group-hover:scale-105 group-hover:grayscale-0" /><span className="absolute left-3 top-3 text-[9px] font-semibold tracking-[0.2em] text-cream/70">{number}</span><button onClick={onAdd} className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-ink/70 text-cream/80 opacity-100 backdrop-blur-sm transition hover:bg-gold hover:text-ink sm:opacity-0 sm:group-hover:opacity-100" aria-label={`Add ${name} to bag`}><Heart size={14} strokeWidth={1.5} /></button></div><div className="pt-4"><div className="flex items-start justify-between gap-2"><h3 className="font-display text-xl tracking-[-0.03em] text-cream sm:text-2xl">{name}</h3><span className="text-xs text-gold">{price}</span></div><p className="mt-1 text-[10px] uppercase tracking-[0.15em] text-cream/45">{type}</p>{tone && <p className="mt-2 text-[10px] text-cream/35">{tone}</p>}<button onClick={onAdd} className="mt-4 flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-gold/80 transition-colors hover:text-gold">Add to bag <ArrowUpRight size={12} /></button></div></div>;
 }
 
 function FooterColumn({ title, items }: { title: string; items: string[] }) {
