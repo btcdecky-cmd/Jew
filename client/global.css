@@ -1,55 +1,44 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap");
 
 @import "tailwindcss";
 @config "../tailwind.config.ts";
 
 @layer base {
   :root {
-    --background: 30 11% 11%;
-    --foreground: 39 33% 93%;
-    --card: 30 10% 14%;
-    --card-foreground: 39 33% 93%;
-    --popover: 30 10% 14%;
-    --popover-foreground: 39 33% 93%;
-    --primary: 39 46% 58%;
-    --primary-foreground: 30 11% 11%;
-    --secondary: 30 8% 16%;
-    --secondary-foreground: 39 33% 93%;
-    --muted: 30 8% 20%;
-    --muted-foreground: 35 10% 58%;
-    --accent: 39 46% 58%;
-    --accent-foreground: 30 11% 11%;
+    --background: 84 13% 8%;
+    --foreground: 42 32% 93%;
+    --card: 84 12% 11%;
+    --card-foreground: 42 32% 93%;
+    --popover: 84 12% 11%;
+    --popover-foreground: 42 32% 93%;
+    --primary: 40 48% 62%;
+    --primary-foreground: 84 13% 8%;
+    --secondary: 84 10% 14%;
+    --secondary-foreground: 42 32% 93%;
+    --muted: 84 8% 19%;
+    --muted-foreground: 42 10% 61%;
+    --accent: 40 48% 62%;
+    --accent-foreground: 84 13% 8%;
     --destructive: 0 62% 42%;
-    --destructive-foreground: 39 33% 93%;
-    --border: 35 12% 25%;
-    --input: 35 12% 25%;
-    --ring: 39 46% 58%;
+    --destructive-foreground: 42 32% 93%;
+    --border: 42 14% 27%;
+    --input: 42 14% 27%;
+    --ring: 40 48% 62%;
     --radius: 0.25rem;
-    --sidebar-background: 30 11% 11%;
-    --sidebar-foreground: 39 33% 93%;
-    --sidebar-primary: 39 46% 58%;
-    --sidebar-primary-foreground: 30 11% 11%;
-    --sidebar-accent: 30 8% 16%;
-    --sidebar-accent-foreground: 39 33% 93%;
-    --sidebar-border: 35 12% 25%;
-    --sidebar-ring: 39 46% 58%;
   }
-}
-
-@layer base {
   * { @apply border-border; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; background: #15170f; }
   body { @apply bg-background text-foreground; font-family: "DM Sans", sans-serif; }
   button, input { font: inherit; }
+  button:focus-visible, input:focus-visible { outline: 1px solid hsl(var(--primary)); outline-offset: 4px; }
   ::selection { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
 }
 
 @layer utilities {
-  .bg-ink { background-color: #1d1b18; }
-  .bg-ink-soft { background-color: #24211d; }
-  .text-cream { color: #f1ede4; }
-  .text-gold { color: #c6a15b; }
-  .bg-gold { background-color: #c6a15b; }
-  .font-display { font-family: "Playfair Display", serif; }
-  .font-editorial { font-family: "Playfair Display", serif; }
+  .bg-obsidian { background-color: #15170f; }
+  .bg-obsidian-soft { background-color: #1c1e15; }
+  .text-ivory { color: #f4f0e7; }
+  .text-champagne { color: #c8a866; }
+  .bg-champagne { background-color: #c8a866; }
+  .font-serif { font-family: "Playfair Display", serif; }
 }
