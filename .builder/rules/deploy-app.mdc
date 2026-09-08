@@ -1,23 +1,9 @@
 ---
 name: deploy-app
-description: How to deploy the app to production using Netlify or Vercel to make the site live
+description: How to deploy the app to production using Vercel to make the site live
 ---
 
-Deploying the app to production is powered by either Netlify or Vercel through MCP (Model Context Protocol) integrations:
-
-**For Netlify:**
-
-- If the Netlify tools are not available, tell the user to [Connect Netlify MCP](#open-mcp-popover).
-- **The operations you need are fields inside a few domain tools, not tools of their own.** `create-new-project`, `get-projects` and `manage-env-vars` never appear in the tool list — they are `operation` values passed to the tools below, so search for the tool and select the operation:
-  - list existing sites — `mcp__netlify__netlify-project-services-reader` with `{"selectSchema":{"operation":"get-projects","params":{}}}`
-  - create a site — `mcp__netlify__netlify-project-services-updater` with `{"selectSchema":{"operation":"create-new-project","params":{"name":"my-app"}}}`
-  - set env vars — `mcp__netlify__netlify-project-services-updater` with `operation: "manage-env-vars"`
-  - deploy — `mcp__netlify__netlify-deploy-services-updater` with `{"selectSchema":{"operation":"deploy-site","params":{"siteId":"<id>"}}}`
-- **Resolve the site ID before anything else — every step below requires it.** Read `siteId` from `.netlify/state.json` if that file exists; otherwise call `get-projects` and match this project against the result; otherwise confirm with the user and call `create-new-project`. Its `name` must be hyphenated alphanumeric (e.g. `my-app`), Netlify site names are globally unique so on a collision pick a different one and retry, and the new site ID comes back nested at `rawToolResponse[0].id`. Never continue without a site ID — say what went wrong and stop.
-- **Before deploying**, sync the project's environment variables (from `<environment_variables>`) to the Netlify site with `manage-env-vars`, passing the site ID resolved above. Any env vars the app depends on locally must also be set on Netlify so they are available during the build and at runtime. This applies to all integrations — Supabase, Neon, Stripe, or any other service that provides env vars. For secret variables (shown with an empty value and a `# secret` comment), pass `REPLACE_ENV.KEY_NAME` as the value to the MCP tool so the runtime can resolve the real secret. Never pass the literal empty value for secrets. Skip platform-specific variables like `NETLIFY_*`, `NODE_ENV`, or variables that are only relevant to the local dev environment.
-- Once env vars are synced, deploy with `deploy-site`, passing the site ID explicitly as `siteId`. That parameter is optional in the schema and is not resolved for you, so omitting it does not error — it silently returns a deploy command containing `--site-id undefined`, which fails with `404 Not Found`. Before running the returned `npx` command, check that its `--site-id` is the real ID; if it is blank or `undefined`, resolve the ID instead of running it. Run the command from the project root, and run it promptly — the token in its URL is short-lived and pinned to that site ID, so do not edit the command or delay it behind other work.
-- Note: Netlify builds the source code on their servers, so while it's good to check if `npm run build` works locally, it's not required.
-- Do not ask user to run any command in the terminal, use the Bash tool when needed.
+Deploying the app to production is powered by Vercel through the project integration.
 
 **For Vercel:**
 
